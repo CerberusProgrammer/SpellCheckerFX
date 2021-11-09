@@ -1,0 +1,11 @@
+.button {
+    -fx-background-color: linear-gradient(#ff5400, #be1d00);
+    -fx-background-radius: 10;
+    -fx-background-insets: 20 5 0 5;
+    -fx-text-fill: black;
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(#ff5400, #be1d00);
+    -fx-background-insets: 0 0 0 0;
+}

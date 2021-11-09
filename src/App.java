@@ -1,6 +1,18 @@
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.FlowPane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import sources.Busqueda;
+import start.Start;
 
+import java.awt.*;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,24 +20,48 @@ import java.util.ResourceBundle;
 
 public class App implements Initializable {
 
+    @FXML
+    private FlowPane flowPane;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ArrayList<Integer> arrayList = new ArrayList<>();
+        try {
+            Reader.importWords();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        for (int i = 0; i < 100; i++)
-            arrayList.add(i);
+        for (String string : Start.completeText) {
+            Button button = new Button(string);
 
-        Collections.shuffle(arrayList);
-        int[] ints = new int[100];
+            if (Reader.diccionario.contains(string))
+                button.setStyle("-fx-background-color: white;");
+            else
+                button.getStylesheets().add("style.css");
 
-        for (int i = 0; i < 100; i++)
-            ints[i] = arrayList.get(i);
+            button.setOnAction(event -> {
+                System.out.println(string);
 
-        int resultado = Busqueda.pruebaLineal(ints, 19);
+                try {
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("minimenu/MiniMenu.fxml"));
+                    Parent parent = fxmlLoader.load();
 
-        if (resultado != -1)
-            System.out.println("pos: " + resultado);
-        else
-            System.out.println("No hay");
+                    Point point = MouseInfo.getPointerInfo().getLocation();
+
+                    Stage stage = new Stage();
+                    stage.setX(point.getX());
+                    stage.setY(point.getY());
+                    stage.setResizable(false);
+                    stage.initStyle(StageStyle.UNDECORATED);
+
+                    stage.setScene(new Scene(parent));
+                    stage.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+
+            flowPane.getChildren().add(button);
+        }
     }
 }

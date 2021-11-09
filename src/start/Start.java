@@ -2,6 +2,10 @@ package start;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -9,7 +13,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
@@ -24,7 +27,10 @@ public class Start {
     @FXML
     private TextArea textArea;
 
-    public static ArrayList<String> stringArrayList = new ArrayList<>();
+    public static ArrayList<String> stylizedText = new ArrayList<>();
+    public static ArrayList<String> completeText = new ArrayList<>();
+
+    public static boolean selection;
 
     @FXML
     void importFile(ActionEvent event) throws IOException {
@@ -49,7 +55,7 @@ public class Start {
         textArea.setDisable(false);
         int totalPalabras = 0;
 
-        for (String string: stringArrayList) {
+        for (String string: stylizedText) {
             totalPalabras++;
             textArea.appendText(totalPalabras + ": " + string + "\n");
         }
@@ -69,11 +75,41 @@ public class Start {
 
             while (st.hasMoreTokens()) {
                 s2 = st.nextToken();
+                completeText.add(s2);
+
                 s2 = s2.replaceAll("[^a-zA-ZÀ-ÿ\\u00f1\\u00d1]", "");
 
                 if (!s2.isEmpty())
-                    stringArrayList.add(s2);
+                    stylizedText.add(s2);
             }
         }
+    }
+
+    @FXML
+    void selectBinary(ActionEvent event) {
+        selection = true;
+        openApp(event);
+    }
+
+    @FXML
+    void selectHash(ActionEvent event) {
+        selection = false;
+        openApp(event);
+    }
+
+    void openApp(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../App.fxml"));
+            Parent parent = fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent));
+            stage.show();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        Node source = (Node) event.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
+        stage.close();
     }
 }
