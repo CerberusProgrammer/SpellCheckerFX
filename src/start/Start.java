@@ -31,6 +31,7 @@ public class Start {
     public static ArrayList<String> completeText = new ArrayList<>();
 
     public static boolean selection;
+    public static File fileText;
 
     @FXML
     void importFile(ActionEvent event) throws IOException {
@@ -41,13 +42,13 @@ public class Start {
                 new FileChooser.ExtensionFilter("txt", "*.txt")
         );
 
-        File file = fileChooser.showOpenDialog(new Stage());
+        fileText = fileChooser.showOpenDialog(new Stage());
 
         labelExample.setVisible(true);
         binButton.setDisable(false);
         hashButton.setDisable(false);
 
-        separator(file);
+        separator(fileText);
         displayPalabras();
     }
 

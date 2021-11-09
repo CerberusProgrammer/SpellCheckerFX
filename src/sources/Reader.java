@@ -1,10 +1,10 @@
 package sources;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import start.Start;
+
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.StringTokenizer;
 
 public class Reader {
@@ -27,6 +27,18 @@ public class Reader {
                 s2 = s2.trim();
                 diccionario.add(s2);
             }
+        }
+    }
+
+    public static void exportWords () throws IOException {
+        Collections.sort(diccionario);
+
+        File file = Start.fileText;
+        FileWriter fileWriter = new FileWriter(file);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+        for (String string: diccionario) {
+            bufferedWriter.write(string);
         }
     }
 }

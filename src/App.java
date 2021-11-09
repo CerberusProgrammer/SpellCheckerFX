@@ -1,8 +1,6 @@
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
@@ -41,10 +39,7 @@ public class App implements Initializable {
             else
                 button.getStylesheets().add("style.css");
 
-            button.setOnAction(event -> {
-                System.out.println(string);
-                displayMiniMenu(event);
-            });
+            button.setOnAction(this::displayMiniMenu);
 
             flowPane.getChildren().add(button);
         }
@@ -70,16 +65,20 @@ public class App implements Initializable {
 
         Button addDictionary = new Button("Agregar al diccionario");
         Button ignoreWord = new Button("Ignorar palabra");
-        Button changeAll = new Button("Ignorar todos");
+        Button changeAll = new Button("Cambiar todos");
 
         addDictionary.setAlignment(TOP_LEFT);
         addDictionary.getStylesheets().add("minimenu.css");
         addDictionary.setPrefSize(anchorPane.getPrefWidth(), anchorPane.getPrefHeight() / 3);
         addDictionary.setOnAction(event1 -> {
-            Reader.diccionario.add(((Button)event.getSource()).getText());
-            ((Button)event.getSource()).setStyle("-fx-background-color: white;");
+            Reader.diccionario.add(((Button) event.getSource()).getText());
+            ((Button) event.getSource()).setStyle("-fx-background-color: white;");
 
-            System.out.println("Se ha agregado la palabra: " + ((Button)event.getSource()).getText());
+            try {
+                Reader.exportWords();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
             stage.close();
         });
@@ -97,6 +96,12 @@ public class App implements Initializable {
         changeAll.getStylesheets().add("minimenu.css");
         changeAll.setPrefSize(anchorPane.getPrefWidth(), anchorPane.getPrefHeight() / 3);
         changeAll.setOnAction(event1 -> {
+            for (String string: Start.completeText) {
+                if (string.equals(((Button)event.getSource()).getText())) {
+                    System.out.println("ok");
+                }
+            }
+
             stage.close();
         });
 
@@ -108,27 +113,5 @@ public class App implements Initializable {
 
         stage.setScene(scene);
         stage.show();
-    }
-
-    @FXML
-    void agregarAlDiccionario(ActionEvent event) {
-
-        close(event);
-    }
-
-    @FXML
-    void ignorarPalabra(ActionEvent event) {
-        close(event);
-    }
-
-    @FXML
-    void cambiarTodos(ActionEvent event) {
-        close(event);
-    }
-
-    void close(ActionEvent event) {
-        Node source = (Node) event.getSource();
-        Stage stage = (Stage) source.getScene().getWindow();
-        stage.close();
     }
 }
