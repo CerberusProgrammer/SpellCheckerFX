@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.*?>
 
 
-<AnchorPane prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="start.Start">
+<AnchorPane prefHeight="400.0" prefWidth="730.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="start.Start">
    <children>
       <Pane prefHeight="400.0" prefWidth="400.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0,0,0);" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <children>
@@ -38,6 +38,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
+            <TextArea fx:id="textArea" disable="true" layoutX="400.0" layoutY="15.0" prefHeight="357.0" prefWidth="303.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0,0,0);" />
          </children>
       </Pane>
    </children>
