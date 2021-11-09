@@ -1,7 +1,6 @@
 package minimenu;
 
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.stage.Stage;
@@ -10,6 +9,7 @@ public class MiniMenu {
 
     @FXML
     void agregarAlDiccionario(ActionEvent event) {
+
         close(event);
     }
 

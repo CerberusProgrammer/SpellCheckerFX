@@ -8,19 +8,19 @@
 <?import javafx.scene.layout.*?>
 
 
-<AnchorPane prefHeight="111.0" prefWidth="197.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="minimenu.MiniMenu">
+<AnchorPane prefHeight="111.0" prefWidth="197.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="App">
    <children>
-      <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#agregarAlDiccionario" prefHeight="38.0" prefWidth="197.0" stylesheets="@minimenu.css" text="Agregar al diccionario">
+      <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#agregarAlDiccionario" prefHeight="38.0" prefWidth="197.0" stylesheets="@../minimenu.css" text="Agregar al diccionario">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <Button alignment="TOP_LEFT" layoutY="37.0" mnemonicParsing="false" onAction="#ignorarPalabra" prefHeight="38.0" prefWidth="197.0" stylesheets="@minimenu.css" text="Ignorar palabra">
+      <Button alignment="TOP_LEFT" layoutY="37.0" mnemonicParsing="false" onAction="#ignorarPalabra" prefHeight="38.0" prefWidth="197.0" stylesheets="@../minimenu.css" text="Ignorar palabra">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <Button alignment="TOP_LEFT" layoutY="77.0" mnemonicParsing="false" onAction="#cambiarTodos" prefHeight="38.0" prefWidth="197.0" stylesheets="@minimenu.css" text="Cambiar todos">
+      <Button alignment="TOP_LEFT" layoutY="77.0" mnemonicParsing="false" onAction="#cambiarTodos" prefHeight="38.0" prefWidth="197.0" stylesheets="@../minimenu.css" text="Cambiar todos">
          <font>
             <Font size="15.0" />
          </font>
