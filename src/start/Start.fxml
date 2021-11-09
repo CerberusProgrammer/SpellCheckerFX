@@ -15,7 +15,7 @@
    <children>
       <Pane prefHeight="400.0" prefWidth="400.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0,0,0);" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <children>
-            <Button fx:id="importButton" layoutX="17.0" layoutY="14.0" mnemonicParsing="false" onAction="#importFile" prefHeight="82.0" prefWidth="356.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0,0,0); -fx-background-radius: 10;" text="Importar archivo">
+            <Button layoutX="17.0" layoutY="14.0" mnemonicParsing="false" onAction="#importFile" prefHeight="82.0" prefWidth="356.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0,0,0); -fx-background-radius: 10;" text="Importar archivo">
                <font>
                   <Font size="18.0" />
                </font>
