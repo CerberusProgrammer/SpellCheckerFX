@@ -10,6 +10,7 @@ import java.util.StringTokenizer;
 public class Reader {
 
     public static ArrayList<String> diccionario = new ArrayList<>();
+    public static ArrayList<Integer> hashCodes = new ArrayList<>();
 
     public static void importWords() throws IOException {
         String s1;
@@ -33,12 +34,18 @@ public class Reader {
     public static void exportWords () throws IOException {
         Collections.sort(diccionario);
 
-        File file = Start.fileText;
+        File file = new File("src/sources/Diccionario.txt");
         FileWriter fileWriter = new FileWriter(file);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
         for (String string: diccionario) {
-            bufferedWriter.write(string);
+            bufferedWriter.write(string + "\n");
+        }
+    }
+
+    public static void toHashCode() {
+        for (String string : diccionario) {
+            hashCodes.add(string.hashCode());
         }
     }
 }

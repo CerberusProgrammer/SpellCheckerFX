@@ -19,22 +19,36 @@ public class Busqueda {
         return -1;
     }
 
-    public static int pruebaLineal(int[] A, int x) {
-        int m = A.length;
-        int dirHash = x % m;
+    public static int busquedaBinaria(String[] A, String s) {
 
-        if (A[dirHash] == x)
-            return dirHash;
-        else {
-            int dirReh = (dirHash + 1) % m;
+        int izquierda = 0;
+        int derecha = A.length - 1;
 
-            while ((A[dirReh] != x) && (A[dirReh] != 0) && (dirReh != dirHash))
-                dirReh = (dirReh + 1) % m;
+        while (izquierda <= derecha) {
+            int indiceDelElementoDelMedio = (int) Math.floor((izquierda + derecha)/2);
+            String elementoDelMedio = A[indiceDelElementoDelMedio];
 
-            if (A[dirReh] == x)
-                return dirReh;
-            else
-                return -1;
+            int resultadoDeLaComparacion = s.compareTo(elementoDelMedio);
+
+            if (resultadoDeLaComparacion == 0) {
+                return indiceDelElementoDelMedio;
+            }
+
+            if (resultadoDeLaComparacion < 0) {
+                derecha = indiceDelElementoDelMedio - 1;
+            } else {
+                izquierda = indiceDelElementoDelMedio + 1;
+            }
         }
+        return -1;
+    }
+
+    public static boolean pruebaLineal(int[] A, int x) {
+        for (int i = 0; i < A.length; i++) {
+            if (x == A[i])
+                return true;
+        }
+
+        return false;
     }
 }
