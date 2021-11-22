@@ -1,7 +1,9 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -46,14 +48,11 @@ public class App implements Initializable {
         if (Start.selection) {
             String[] strings = new String[Reader.diccionario.size()];
 
-            for (int i = 0; i < Reader.diccionario.size(); i++) {
+            for (int i = 0; i < Reader.diccionario.size(); i++)
                 strings[i] = Reader.diccionario.get(i);
-            }
 
-            for (String string : Start.completeText) {
+            for (String string : Start.stylizedText) {
                 Button button = new Button(string);
-
-                System.out.println(Busqueda.busquedaBinaria(strings, string));
 
                 int pos = Busqueda.busquedaBinaria(strings, string);
 
@@ -124,7 +123,10 @@ public class App implements Initializable {
         addDictionary.getStylesheets().add("minimenu.css");
         addDictionary.setPrefSize(anchorPane.getPrefWidth(), anchorPane.getPrefHeight() / 3);
         addDictionary.setOnAction(event1 -> {
-            Reader.diccionario.add(((Button) event.getSource()).getText());
+            String string = ((Button) event.getSource()).getText();
+
+            if (!Reader.diccionario.contains(string))
+                Reader.diccionario.add(string);
             ((Button) event.getSource()).setStyle("-fx-background-color: white;");
             agregadoDiccionario++;
             displayInformation();
@@ -147,7 +149,14 @@ public class App implements Initializable {
         changeAll.setOnAction(event1 -> {
             for (String string : Start.completeText) {
                 if (string.equals(((Button) event.getSource()).getText())) {
-                    System.out.println("ok");
+                    ((Button) event.getSource()).setStyle("-fx-background-color: white;");
+                }
+            }
+
+            for (Node node: flowPane.getChildren()) {
+                if (((Button)node).getText().equals(((Button)event.getSource()).getText())) {
+                    System.out.println("encontrado");
+                    node.setStyle("-fx-background-color: white;");
                 }
             }
 
@@ -195,6 +204,34 @@ public class App implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    void open(ActionEvent event) {
+        Start.completeText.clear();
+        Start.stylizedText.clear();
+        Reader.diccionario.clear();
+        Reader.hashCodes.clear();
+        agregadoDiccionario = 0;
+        omision = 0;
+
+        openApp(event);
+    }
+
+    void openApp(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("start/Start.fxml"));
+            Parent parent = fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent));
+            stage.show();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        Node source = (Node) event.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
