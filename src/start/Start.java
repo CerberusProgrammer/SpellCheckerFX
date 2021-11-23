@@ -75,7 +75,7 @@ public class Start {
             StringTokenizer st = new StringTokenizer (s1);
 
             while (st.hasMoreTokens()) {
-                s2 = st.nextToken();
+                s2 = st.nextToken().toLowerCase();
                 completeText.add(s2);
 
                 s2 = s2.replaceAll("[^a-zA-ZÀ-ÿ\\u00f1\\u00d1]", "");

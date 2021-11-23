@@ -35,6 +35,7 @@ public class App implements Initializable {
 
     private int agregadoDiccionario = 0;
     private int omision = 0;
+    private int wrongWords = 0;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -46,10 +47,10 @@ public class App implements Initializable {
         }
 
         if (Start.selection) {
-            String[] strings = new String[Reader.diccionario.size()];
+            String[] strings = new String[Reader.dictionary.size()];
 
-            for (int i = 0; i < Reader.diccionario.size(); i++)
-                strings[i] = Reader.diccionario.get(i);
+            for (int i = 0; i < Reader.dictionary.size(); i++)
+                strings[i] = Reader.dictionary.get(i);
 
             for (String string : Start.stylizedText) {
                 Button button = new Button(string);
@@ -60,6 +61,7 @@ public class App implements Initializable {
                     button.setStyle("-fx-background-color: white;");
                 } else {
                     button.getStylesheets().add("style.css");
+                    wrongWords++;
                     button.setOnAction(this::displayMiniMenu);
                 }
 
@@ -91,7 +93,7 @@ public class App implements Initializable {
 
     void displayInformation() {
         labelInformation.setText("Total de palabras: " + Start.completeText.size() + ", " +
-                "Palabras erroneas: " + Start.stylizedText.size() + ", " +
+                "Palabras erroneas: " + wrongWords + ", " +
                 "Agregadas: " + agregadoDiccionario + ", " +
                 "Omitidas: " + omision + ".");
     }
@@ -123,12 +125,16 @@ public class App implements Initializable {
         addDictionary.getStylesheets().add("minimenu.css");
         addDictionary.setPrefSize(anchorPane.getPrefWidth(), anchorPane.getPrefHeight() / 3);
         addDictionary.setOnAction(event1 -> {
-            String string = ((Button) event.getSource()).getText();
+            String string = ((Button) event.getSource()).getText().toLowerCase();
 
-            if (!Reader.diccionario.contains(string))
-                Reader.diccionario.add(string);
+            if (!Reader.dictionary.contains(string)) {
+                Reader.dictionary.add(string);
+                agregadoDiccionario++;
+                wrongWords--;
+            }
+
             ((Button) event.getSource()).setStyle("-fx-background-color: white;");
-            agregadoDiccionario++;
+
             displayInformation();
             stage.close();
         });
@@ -139,6 +145,7 @@ public class App implements Initializable {
         ignoreWord.setOnAction(event1 -> {
             ((Button) event.getSource()).setStyle("-fx-background-color: white;");
             omision++;
+            wrongWords--;
             displayInformation();
             stage.close();
         });
@@ -147,17 +154,19 @@ public class App implements Initializable {
         changeAll.getStylesheets().add("minimenu.css");
         changeAll.setPrefSize(anchorPane.getPrefWidth(), anchorPane.getPrefHeight() / 3);
         changeAll.setOnAction(event1 -> {
-            for (String string : Start.completeText) {
-                if (string.equals(((Button) event.getSource()).getText())) {
-                    ((Button) event.getSource()).setStyle("-fx-background-color: white;");
-                }
-            }
+            String text = ((Button)event.getSource()).getText().toLowerCase();
 
             for (Node node: flowPane.getChildren()) {
-                if (((Button)node).getText().equals(((Button)event.getSource()).getText())) {
-                    System.out.println("encontrado");
+                String stringNode = ((Button)node).getText().toLowerCase();
+
+                if (stringNode.equals(text))
                     node.setStyle("-fx-background-color: white;");
-                }
+            }
+
+            if (!Reader.dictionary.contains(text)) {
+                Reader.dictionary.add(text);
+                agregadoDiccionario++;
+                wrongWords--;
             }
 
             displayInformation();
@@ -210,7 +219,7 @@ public class App implements Initializable {
     void open(ActionEvent event) {
         Start.completeText.clear();
         Start.stylizedText.clear();
-        Reader.diccionario.clear();
+        Reader.dictionary.clear();
         Reader.hashCodes.clear();
         agregadoDiccionario = 0;
         omision = 0;
