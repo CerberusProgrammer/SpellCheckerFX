@@ -56,7 +56,7 @@ public class Start {
         textArea.setDisable(false);
         int totalPalabras = 0;
 
-        for (String string: stylizedText) {
+        for (String string : stylizedText) {
             totalPalabras++;
             textArea.appendText(totalPalabras + ": " + string + "\n");
         }
@@ -72,7 +72,7 @@ public class Start {
         BufferedReader bufferedReader = new BufferedReader(fileReader);
 
         while ((s1 = bufferedReader.readLine()) != null) {
-            StringTokenizer st = new StringTokenizer (s1);
+            StringTokenizer st = new StringTokenizer(s1);
 
             while (st.hasMoreTokens()) {
                 s2 = st.nextToken().toLowerCase();
@@ -105,7 +105,7 @@ public class Start {
             Stage stage = new Stage();
             stage.setScene(new Scene(parent));
             stage.show();
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

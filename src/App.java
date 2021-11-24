@@ -154,10 +154,10 @@ public class App implements Initializable {
         changeAll.getStylesheets().add("minimenu.css");
         changeAll.setPrefSize(anchorPane.getPrefWidth(), anchorPane.getPrefHeight() / 3);
         changeAll.setOnAction(event1 -> {
-            String text = ((Button)event.getSource()).getText().toLowerCase();
+            String text = ((Button) event.getSource()).getText().toLowerCase();
 
-            for (Node node: flowPane.getChildren()) {
-                String stringNode = ((Button)node).getText().toLowerCase();
+            for (Node node : flowPane.getChildren()) {
+                String stringNode = ((Button) node).getText().toLowerCase();
 
                 if (stringNode.equals(text))
                     node.setStyle("-fx-background-color: white;");
@@ -193,29 +193,6 @@ public class App implements Initializable {
     }
 
     @FXML
-    void saveAsFile(ActionEvent event) {
-        try {
-            String ruta = "example.txt";
-            File file = new File(ruta);
-
-            if (!file.exists())
-                file.createNewFile();
-
-            FileWriter fileWriter = new FileWriter(file);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-
-            for (Node node : flowPane.getChildren()) {
-                Button button = ((Button) node);
-                bufferedWriter.write(button.getText() + " ");
-            }
-
-            bufferedWriter.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
     void open(ActionEvent event) {
         Start.completeText.clear();
         Start.stylizedText.clear();
@@ -234,7 +211,7 @@ public class App implements Initializable {
             Stage stage = new Stage();
             stage.setScene(new Scene(parent));
             stage.show();
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

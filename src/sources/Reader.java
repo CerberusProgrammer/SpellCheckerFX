@@ -21,7 +21,7 @@ public class Reader {
         BufferedReader bufferedReader = new BufferedReader(fileReader);
 
         while ((s1 = bufferedReader.readLine()) != null) {
-            StringTokenizer st = new StringTokenizer (s1);
+            StringTokenizer st = new StringTokenizer(s1);
 
             while (st.hasMoreTokens()) {
                 s2 = st.nextToken();
@@ -33,14 +33,14 @@ public class Reader {
         bufferedReader.close();
     }
 
-    public static void exportWords () throws IOException {
+    public static void exportWords() throws IOException {
         Collections.sort(dictionary);
 
         File file = new File(dirFile);
         FileWriter fileWriter = new FileWriter(file);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-        for (String string: dictionary)
+        for (String string : dictionary)
             if (!string.isEmpty())
                 bufferedWriter.write(string + "\n");
 

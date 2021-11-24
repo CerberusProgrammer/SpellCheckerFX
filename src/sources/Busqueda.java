@@ -8,7 +8,7 @@ public class Busqueda {
         int derecha = A.length - 1;
 
         while (izquierda <= derecha) {
-            int indiceDelElementoDelMedio = (int) Math.floor((izquierda + derecha)/2);
+            int indiceDelElementoDelMedio = (int) Math.floor((izquierda + derecha) / 2);
             String elementoDelMedio = A[indiceDelElementoDelMedio];
 
             int resultadoDeLaComparacion = s.compareTo(elementoDelMedio);
