@@ -52,7 +52,7 @@ public class App implements Initializable {
             for (int i = 0; i < Reader.dictionary.size(); i++)
                 strings[i] = Reader.dictionary.get(i);
 
-            for (String string : Start.stylizedText) {
+            for (String string : Start.completeText) {
                 Button button = new Button(string);
 
                 int pos = Busqueda.busquedaBinaria(strings, string);

@@ -42,7 +42,8 @@ public class Reader {
 
         for (String string : dictionary)
             if (!string.isEmpty())
-                bufferedWriter.write(string + "\n");
+                bufferedWriter.write(string.replaceAll("[^a-zA-ZÀ-ÿ\\u00f1\\u00d1]", "")
+                        .toLowerCase() + "\n");
 
         bufferedWriter.close();
     }
